@@ -18,7 +18,15 @@ class Application
         resp.write "#{item_in_cart}\n"
       end
     elsif req.path.match(/add/)
-      
+      search_term = req.params["q"]
+      @@items.each do |item|
+        if search_term == item
+          @@cart << search_term
+        else
+          resp.write "error"
+        end
+      end
+      resp.write "Added"
     else
       resp.write "Path Not Found"
     end
